@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Validation\Rule;
 
 class User extends Authenticatable
 {
@@ -92,5 +93,42 @@ class User extends Authenticatable
         ];
 
         return Validator::make($params, $rules, $messages, $attributes);
+    }
+
+    public static function createOrUpdate($params)
+    {
+        $validator = self::validateForm($params);
+        if ($validator->fails()) {
+            return [
+                'status' => '422',
+                'message' => $validator->getMessageBag()
+            ];
+        }
+
+        if ($params['id']) {
+            $user = self::whereId($params['id'])->first();
+            $user->update([
+                'name' => $params['name'] ?? $user->name,
+                'role' => $params['role'] ?? $user->role,
+                'email' => $params['email'] ?? $user->email,
+            ]);
+
+            return [
+                'status' => 'success',
+                'message' => 'berhasil mengubah data !'
+            ];
+        }
+
+        self::create([
+            'name' => $params['name'],
+            'email' => $params['email'],
+            'role' => $params['role'],
+            'password' => Hash::make('12345678')
+        ]);
+
+        return [
+            'status' => 'success',
+            'message' => 'berhasil menambahkan data !'
+        ];
     }
 }
