@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTasksTable extends Migration
+class CreateTaskCycleItemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateTasksTable extends Migration
      */
     public function up()
     {
-        Schema::create('tasks', function (Blueprint $table) {
+        Schema::create('task_cycle_items', function (Blueprint $table) {
             $table->id();
-            //$table->foreignId('cycle_id');
-            $table->foreignId('tool_id');
-            // $table->string('body');
-            $table->timestamps();
-            $table->softDeletes();
+            $table->foreignId('cycle_id');
+            $table->foreignId('task_id');
+            //$table->timestamps();
         });
     }
 
@@ -30,6 +28,6 @@ class CreateTasksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tasks');
+        Schema::dropIfExists('task_cycle_items');
     }
 }

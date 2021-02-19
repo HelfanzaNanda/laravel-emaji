@@ -26,4 +26,14 @@ class Task extends Model
     {
         return $this->hasMany(TaskResult::class);
     }
+
+    public function taskItems()
+    {
+        return $this->hasMany(TaskItems::class);
+    }
+
+    public function taskCycleItems()
+    {
+        return $this->hasMany(TaskCycleItems::class);
+    }
 }

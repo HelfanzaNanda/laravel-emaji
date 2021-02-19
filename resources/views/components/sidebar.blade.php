@@ -8,13 +8,11 @@
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Alat</li>
-            <li><a class="nav-link" href="blank.html"> <i class="fas fa-plus"></i> <span>Tambah</span></a> </li>
-            <li><a class="nav-link" href="blank.html"> <i class="fas fa-toolbox"></i> <span>Tabel</span></a> </li>
+            <li><a class="nav-link" href="{{ route('tool.index') }}"> <i class="fas fa-toolbox"></i> <span>Alat</span></a> </li>
         </ul>
         <ul class="sidebar-menu">
             <li class="menu-header">Pertanyaan</li>
-            <li><a class="nav-link" href="blank.html"> <i class="fas fa-plus"></i> <span>Tambah</span></a> </li>
-            <li><a class="nav-link" href="blank.html"> <i class="fas fa-tasks"></i> <span>Tabel</span></a> </li>
+            <li><a class="nav-link" href="{{ route('task.index') }}"> <i class="fas fa-tasks"></i> <span>Pertanyaan</span></a> </li>
         </ul>
         <ul class="sidebar-menu">
             <li class="menu-header">Hasil</li>
