@@ -26,15 +26,27 @@ class TaskController extends Controller
     public function createOrUpdate(Request $request)
     {
         $parans = $request->all();
+        //return $parans;
         return Task::createOrUpdate($parans, $request);
     }
 
-    public function delete($id)
+    public function delete($taskId)
     {
-        Task::destroy($id);
+        $task = Task::whereId($taskId)->first();
+        $task->taskItems()->delete();
+        $task->taskCycleItems()->delete();
+        $task->delete();
         return [
+            'url' => env("APP_URL")."/tool",
             'status' => 'success',
             'message' => 'Berhasil mengahapus data'
         ];
+    }
+
+    public function detail($toolId)
+    {
+        return view('task.detail', [
+            'tool' => Tool::whereId($toolId)->first()
+        ]);
     }
 }

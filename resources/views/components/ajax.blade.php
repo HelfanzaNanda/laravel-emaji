@@ -16,7 +16,7 @@
         })
     }
 
-    function alertSuccess(message){
+    function alertSuccess(message, url){
         setTimeout(function() {
             hideLoading()
             Swal.fire({
@@ -24,7 +24,7 @@
                 title: message,
                 showConfirmButton: false,
                 timer: 1500
-            }).then( ()=> location.reload());
+            }).then( ()=> window.location.replace(url));
         }, 500);
     }
 
@@ -32,10 +32,7 @@
         Swal.fire({
             icon: 'error',
             title: 'Gagal',
-            text: message,
-            confirmButtonColor: '#0760ef',
-            type:"error",
-            html: true
+            text: message
         });
     }
 
@@ -63,7 +60,7 @@
             
             },
             success: function(res) {
-                res.status == 'success' ? alertSuccess(res.message) : alertError(res.message)
+                res.status == 'success' ? alertSuccess(res.message, res.url) : alertError(res.message)
             }
         })
     }

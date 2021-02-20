@@ -3,18 +3,106 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\DB;
 
 class Task extends Model
 {
     use HasFactory, SoftDeletes;
     protected $guarded = [];
 
-
-    public function cycle()
+    public static function validateForm($params)
     {
-        return $this->belongsTo(Cycle::class);
+        $rules = [
+            'cycle_id.*' => ['required'],
+            'tool_id' => ['required'],
+            'body.*' => ['required'],
+        ];
+
+        $messages = [
+            'required' => ':attribute tidak boleh kosong',
+        ];
+
+        $attributes = [
+            'cycle_id' => 'Siklus',
+            'tool_id' => 'Alat',
+            'body' => 'Pertanyaan',
+        ];
+
+        return Validator::make($params, $rules, $messages, $attributes);
+    }
+
+
+    public static function createOrUpdate($params)
+    {
+        $validator = self::validateForm($params);
+        if ($validator->fails()) {
+            return [
+                'status' => '422',
+                'message' => $validator->getMessageBag()
+            ];
+        }
+        DB::beginTransaction();
+
+        try {
+            
+            if ($params['id']) {
+                $taskOld = self::whereId($params['id'])->first();
+                $taskOld->taskItems()->delete();
+                $taskOld->taskCycleItems()->delete();
+                $taskOld->delete();
+
+                $task = self::create([
+                    'tool_id' => $params['tool_id'],
+                ]);
+        
+                $task->taskItems()->create([
+                    'body' => json_encode($params['body'])
+                ]);
+        
+                $task->taskCycleItems()->create([
+                    'cycle_id' => json_encode($params['cycle_id'])
+                ]);
+
+                DB::commit();
+                return [
+                    "url" => env("APP_URL").'/tool',
+                    'status' => 'success',
+                    'message' => 'berhasil mengubah data !'
+                ];
+            }
+
+            $task = self::create([
+                'tool_id' => $params['tool_id'],
+            ]);
+            foreach ($params['body'] as $value) {
+                $task->taskItems()->create([
+                    'body' => $value
+                ]);
+            }
+            foreach ($params['cycle_id'] as $value) {
+                $task->taskCycleItems()->create([
+                    'cycle_id' => $value
+                ]);
+            }
+    
+            DB::commit();
+            return [
+                "url" => env("APP_URL").'/tool',
+                'status' => 'success',
+                'message' => 'berhasil menambahkan data !'
+            ];
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return [
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ];
+        }
+
+        
     }
 
     public function tool()

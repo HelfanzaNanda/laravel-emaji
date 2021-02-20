@@ -9,7 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class TaskItems extends Model
 {
     use HasFactory;
-    protected $timestamps = false;
+    public $timestamps = false;
+    protected $guarded = [];
 
     public function task()
     {

@@ -25,6 +25,7 @@ class ToolController extends Controller
     {
         Tool::destroy($id);
         return [
+            "url" => env("APP_URL").'/tool',
             'status' => 'success',
             'message' => 'Berhasil mengahapus data'
         ];

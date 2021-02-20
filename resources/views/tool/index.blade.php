@@ -13,7 +13,10 @@
             <div>
                 <h2 class="section-title">Alat</h2>
             </div>
-            <div><button type="button" class="btn btn-primary btn-add">Tambah Alat</button></div>
+            <div>
+                <div class="d-inline"><a href="{{ route('task.create') }}" type="button" class="btn btn-primary">Tambah Pertanyaan</a></div>
+                <div class="d-inline"><button type="button" class="btn btn-primary btn-add">Tambah Alat</button></div>
+            </div>
         </div>
 
         <div class="row">
@@ -43,9 +46,14 @@
                                         <a href="#" data-tool="{{ $tool }}" class="btn btn-edit btn-sm btn-outline-warning mr-2">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a href="#" data-id="{{ $tool->id }}" class="btn btn-delete btn-sm btn-outline-danger">
+                                        <a href="#" data-id="{{ $tool->id }}" class="btn btn-delete btn-sm btn-outline-danger mr-2">
                                             <i class="fas fa-trash"></i>
                                         </a>
+                                        @if (count($tool->tasks) > 0)
+                                        <a href="{{ route('task.detail', $tool->id) }}" class="btn  btn-sm btn-outline-success">
+                                            Detail Pertanyaan
+                                        </a>
+                                        @endif
                                     </td>
                                 </tr>
                                 @empty
@@ -105,7 +113,7 @@
         var url = BASE_URL+'/tool';
         var response = await createOrUpdate(url, form_data);
         if(response.status == 'success') {
-            alertSuccess(response.message);
+            alertSuccess(response.message, response.url);
         } else {
             hideLoading()
             if (response.status == '422') {

@@ -21,10 +21,10 @@
                     <div class="card">
                         <div class="card-body">
                             @csrf
-                                <input type="hidden" name="id" id="id">
                                 <div class="form-group">
                                     <label for="cycle_id">Siklus</label>
-                                    <select name="cycle_id" id="cycle_id" class="form-control select-multiple" multiple>
+                                    <input type="hidden" name="id" id="id">
+                                    <select name="cycle_id[]" id="cycle_id" class="form-control multiple-select" multiple>
                                         @foreach ($cycles as $cycle)
                                         <option value="{{ $cycle->id }}">{{ $cycle->name }}</option>
                                         @endforeach
@@ -33,7 +33,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="tool_id">Alat</label>
-                                    <select name="tool_id" id="tool_id" class="form-control">
+                                    <select name="tool_id" id="tool_id" class="form-control single-select">
                                         <option value="" selected disabled>Pilih Alat</option>
                                         @foreach ($tools as $tool)
                                         <option value="{{ $tool->id }}">{{ $tool->name }}</option>
@@ -76,7 +76,8 @@
 @push('scripts')
 <script>
     $(document).ready(function() {
-        $('.select-multiple').select2();
+        $('.multiple-select').select2();
+        $('.single-select').select2();
     })
 
     $(document).on('click', '.btn-add-row', function(e) {
@@ -100,6 +101,26 @@
             cols += `</div>`
         return cols
     }
+
+
+    $('form#task-form').submit( async function(e){
+        e.preventDefault();
+        setLoading();
+        var form_data = new FormData( this );
+        var url = BASE_URL+'/task';
+        var response = await createOrUpdate(url, form_data);
+        if(response.status == 'success') {
+            alertSuccess(response.message, response.url);
+        } else {
+            hideLoading()
+            if (response.status == '422') {
+                $('.error-name').text(response.message.name ? response.message.name[0] : '')
+                $('.error-email').text(response.message.email ? response.message.email[0] : '')
+                $('.error-role').text(response.message.role ? response.message.role[0] : '')
+            }
+            console.log(response);
+        }
+    });
 
 </script>
 @endpush

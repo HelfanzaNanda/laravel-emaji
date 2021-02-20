@@ -114,6 +114,7 @@ class User extends Authenticatable
             ]);
 
             return [
+                "url" => env("APP_URL").'/user',
                 'status' => 'success',
                 'message' => 'berhasil mengubah data !'
             ];
@@ -127,6 +128,7 @@ class User extends Authenticatable
         ]);
 
         return [
+            "url" => env("APP_URL").'/user',
             'status' => 'success',
             'message' => 'berhasil menambahkan data !'
         ];

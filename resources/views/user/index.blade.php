@@ -97,7 +97,7 @@
         var url = BASE_URL+'/user';
         var response = await createOrUpdate(url, form_data);
         if(response.status == 'success') {
-            alertSuccess(response.message);
+            alertSuccess(response.message, response.url);
         } else {
             hideLoading()
             if (response.status == '422') {

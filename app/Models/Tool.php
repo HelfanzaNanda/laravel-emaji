@@ -19,6 +19,11 @@ class Tool extends Model
         return $this->hasMany(Task::class);
     }
 
+    public function task()
+    {
+        return $this->hasOne(Task::class);
+    }
+
     public static function uploadImage($img)
     {
         return cloudinary()->upload($img->getRealPath())->getSecurePath();
@@ -68,6 +73,7 @@ class Tool extends Model
             ]);
 
             return [
+                "url" => env("APP_URL").'/tool',
                 'status' => 'success',
                 'message' => 'berhasil mengubah data !'
             ];
@@ -81,6 +87,7 @@ class Tool extends Model
         ]);
 
         return [
+            "url" => env("APP_URL").'/tool',
             'status' => 'success',
             'message' => 'berhasil menambahkan data !'
         ];
