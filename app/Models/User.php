@@ -71,9 +71,10 @@ class User extends Authenticatable
 
     public static function validateForm($params)
     {
+        $id = $params['id'] ?? '';
         $rules = [
             'name' => ['required', 'string', 'min:5'],
-            'email' => ['required', 'email', 'unique:users,email,' . optional($params)['id']],
+            'email' => ['required', 'email', 'unique:users,email,' . $id],
             'role' => ['required', 'in:pengawas,penguji'],
         ];
 
