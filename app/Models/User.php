@@ -73,7 +73,7 @@ class User extends Authenticatable
     {
         $rules = [
             'name' => ['required', 'string', 'min:5'],
-            'email' => ['required', 'email', 'unique:users,email'],
+            'email' => ['email', 'unique:users,email'],
             'role' => ['required', 'in:pengawas,penguji'],
         ];
 
