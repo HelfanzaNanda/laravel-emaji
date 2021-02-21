@@ -71,12 +71,14 @@
 @push('scripts')
 <script>
     $('.btn-add').on('click', function() {
+        $('#email').attr('disabled', false);
         resetForm();
         resetError();
         $('#user-modal').modal('show');
     });
 
     $(document).on('click', '.btn-edit', function() {
+        $('#email').attr('disabled', true);
         resetForm();
         resetError();
         const user = $(this).data('user');
