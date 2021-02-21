@@ -14,7 +14,7 @@ class AddColumnMerkOnTableTools extends Migration
     public function up()
     {
         Schema::table('tools', function (Blueprint $table) {
-            $table->string('merk')->after('name');
+            $table->string('merk')->after('name')->nullable();
         });
     }
 
