@@ -41,6 +41,11 @@
                                     </select>
                                     <span class="text-danger error-tool_id"></span>
                                 </div>
+                                <div class="form-group">
+                                    <label for="tool_id">Alat Yang Digunakan</label>
+                                    <input type="text" class="form-control" name="tools_used" id="tools_used">
+                                    <span class="text-danger error-tools-used"></span>
+                                </div>
                         </div>
                     </div>
 

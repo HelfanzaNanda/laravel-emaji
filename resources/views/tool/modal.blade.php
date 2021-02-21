@@ -17,11 +17,16 @@
             <span class="text-danger error-name"></span>
           </div>
           <div class="form-group">
+            <label for="merk">Merk</label>
+            <input type="text" class="form-control" name="merk" id="merk">
+            <span class="text-danger error-merk"></span>
+          </div>
+          <div class="form-group">
             <label>Foto</label>
             <div class="custom-file">
-              <input type="file" class="custom-file-input" id="image" name="image" accept=".png, .jpg, .jpeg">
+              <input type="file" class="custom-file-input" id="image" name="image" accept=".png, .jpg, .jpeg"  onchange="readURL(this)">
               <label class="custom-file-label" id="label-img" for="image">Pilih Foto...</label>
-              <img id="preview-image" class="img-fluid my-2" width="50" height="50">
+              <img id="preview-image" class="img-fluid my-2" width="50" height="50" style="visibility: hidden">
               <div class="invalid-feedback">Example invalid custom file feedback</div>
             </div>
             <span class="text-danger error-image"></span>

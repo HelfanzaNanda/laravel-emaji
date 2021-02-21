@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\{TaskController, TaskResultController, UserController, ToolController};
+use App\Http\Controllers\Admin\{FileController, TaskController, TaskResultController, UserController, ToolController};
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +33,12 @@ Route::middleware('auth')->group(function() {
     
     Route::prefix('task-result')->group(function() {
         Route::get('/', [TaskResultController::class, 'index'])->name('task.result.index');
+    });
+
+    Route::prefix('file')->group(function() {
+        Route::get('/', [FileController::class, 'index'])->name('file.index');
+        Route::post('/', [FileController::class, 'createOrUpdate']);
+        Route::get('/{id}/delete', [FileController::class, 'delete']);
     });
 });
 

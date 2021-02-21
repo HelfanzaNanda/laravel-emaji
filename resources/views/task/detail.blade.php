@@ -25,6 +25,7 @@
                                 <div><h6>{{'Siklus : '. $task->taskCycleItems()->get()->implode('cycle.name', ', ') }}</h6></div>
                                 <div><button data-tool-id="{{ $task->id }}" class="btn btn-delete btn-danger">delete</button></div>
                             </div>
+                            <div><p>{{'Alat Yang Digunakan : '. $task->tools_used }}</p></div>
                             <tbody>
                                 @foreach ($task->taskItems as $item)
                                     <tr>

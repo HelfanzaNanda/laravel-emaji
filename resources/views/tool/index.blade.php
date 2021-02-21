@@ -99,6 +99,7 @@
         const tool = $(this).data('tool');
         $('#id').val(tool.id)
         $('#name').val(tool.name)
+        $('#merk').val(tool.merk)
         $('#preview-image').attr("src", tool.image).attr("alt", tool.name)
         $('#tool-modal').modal('show');
     });
@@ -133,12 +134,26 @@
     function resetForm() {
         $('#id').val('');
         $('#name').val('');
+        $('#merk').val('');
         $('#image').val('');
     }
 
     function resetError(){
         $('.error-name').text('')
+        $('.error-merk').text('')
         $('.error-image').text('')
     }
+
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+              $('#preview-image').attr('src', e.target.result).attr('style', "visibility: ''");
+              $('#label-img').text(input.files[0].name);
+          };
+          reader.readAsDataURL(input.files[0]);
+          
+      }
+  }
 </script>
 @endpush

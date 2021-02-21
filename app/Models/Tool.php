@@ -33,6 +33,7 @@ class Tool extends Model
     {
         $rules = [
             'name' => ['required', 'string'],
+            'merk' => ['required'],
             'image' => ['required', 'image', 'mimes:jpeg,png,jpg,svg', 'max:2048'],
         ];
 
@@ -46,7 +47,8 @@ class Tool extends Model
 
         $attributes = [
             'name' => 'Nama',  
-            'image' => 'Foto',  
+            'image' => 'Foto',
+            'merk' => 'Merk',
         ];
 
         return Validator::make($params, $rules, $messages, $attributes);
@@ -69,6 +71,7 @@ class Tool extends Model
             }
             $tool->update([
                 'name' => $params['name'] ?? $tool->name,
+                'merk' => $params['merk'] ?? $tool->merk,
                 'image' => $request->file('image') ? $responseImage : $tool->image,
             ]);
 
@@ -77,11 +80,11 @@ class Tool extends Model
                 'status' => 'success',
                 'message' => 'berhasil mengubah data !'
             ];
-            
         }
 
         self::create([
             'name' => $params['name'],
+            'merk' => $params['merk'],
             'slug' => Str::slug($params['name']). '-'. Str::random(10),
             'image' => self::uploadImage($request->file('image')),
         ]);

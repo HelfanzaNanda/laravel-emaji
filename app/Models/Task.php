@@ -49,13 +49,13 @@ class Task extends Model
         try {
             
             if ($params['id']) {
-                $taskOld = self::whereId($params['id'])->first();
-                $taskOld->taskItems()->delete();
-                $taskOld->taskCycleItems()->delete();
-                $taskOld->delete();
+                $task = self::whereId($params['id'])->first();
+                $task->taskItems()->delete();
+                $task->taskCycleItems()->delete();
 
-                $task = self::create([
+                $task->update([
                     'tool_id' => $params['tool_id'],
+                    'tools_used' => $params['tools_used'],
                 ]);
         
                 $task->taskItems()->create([
@@ -76,6 +76,7 @@ class Task extends Model
 
             $task = self::create([
                 'tool_id' => $params['tool_id'],
+                'tools_used' => $params['tools_used'],
             ]);
             foreach ($params['body'] as $value) {
                 $task->taskItems()->create([
