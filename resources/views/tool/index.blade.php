@@ -28,6 +28,7 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Nama</th>
+                                    <th scope="col">Merk</th>
                                     <th scope="col">Foto</th>
                                     <th scope="col">Action</th>
                                 </tr>
@@ -38,8 +39,9 @@
                                     <td>{{ (($tools->currentPage() - 1 ) * $tools->perPage() ) + $loop->iteration }}
                                     </td>
                                     <td>{{ $tool->name }}</td>
-                                    <td><img class="btn-img" data-tool="{{ $tool }}" 
-                                        src="{{ $tool->image }}" alt="{{ $tool->name }}" 
+                                    <td>{{ $tool->merk }}</td>
+                                    <td><img class="btn-img" data-tool="{{ $tool }}"
+                                        src="{{ $tool->image }}" alt="{{ $tool->name }}"
                                         width="50" height="50" style="cursor: pointer">
                                     </td>
                                     <td>
@@ -48,6 +50,9 @@
                                         </a>
                                         <a href="#" data-id="{{ $tool->id }}" class="btn btn-delete btn-sm btn-outline-danger mr-2">
                                             <i class="fas fa-trash"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-save btn-sm btn-outline-primary">
+                                            <i class="fas fa-qrcode"></i>
                                         </a>
                                         @if (count($tool->tasks) > 0)
                                         <a href="{{ route('task.detail', $tool->id) }}" class="btn  btn-sm btn-outline-success">
@@ -152,7 +157,7 @@
               $('#label-img').text(input.files[0].name);
           };
           reader.readAsDataURL(input.files[0]);
-          
+
       }
   }
 </script>

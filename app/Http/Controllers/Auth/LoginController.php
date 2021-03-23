@@ -41,18 +41,16 @@ class LoginController extends Controller
         Auth::attempt($credentials);
         if (Auth::user()->isAdmin()) {
             return [
-                "url" => env("APP_URL").'/user',
+                "url" => env("APP_URL") . '/user',
                 'status' => 'success',
                 'message' => 'berhasil Login !'
             ];
-        }else {
+        } else {
             return [
                 'status' => 'error',
                 'message' => 'anda tidak mempunyai akses'
             ];
         }
-
-
     }
 
     public function logout(Request $request)
