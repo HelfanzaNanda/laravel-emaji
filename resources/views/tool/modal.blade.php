@@ -61,3 +61,22 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="generate-qrcode-modal">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="preview-img-title"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex justify-content-center align-items-center">
+          {{-- <input type="text" style="width: 20%" id="a-id"> --}}
+          <div id="qrcode"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

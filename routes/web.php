@@ -4,11 +4,13 @@ use App\Http\Controllers\Admin\{FileController, TaskController, TaskResultContro
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', function(){
+    return redirect()->route('login');
+});
 
-Route::get('/login', [LoginController::class, 'showLoginForm']);
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-
 
 Route::middleware('auth')->group(function() {
     Route::prefix('user')->group(function() {

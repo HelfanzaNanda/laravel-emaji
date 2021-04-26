@@ -51,9 +51,16 @@
                                         <a href="#" data-id="{{ $tool->id }}" class="btn btn-delete btn-sm btn-outline-danger mr-2">
                                             <i class="fas fa-trash"></i>
                                         </a>
+                                        @if ($tool->qrcode)
                                         <a href="#" class="btn btn-save btn-sm btn-outline-primary">
-                                            <i class="fas fa-qrcode"></i>
+                                            <p>Lihat Qr Code</p>
                                         </a>
+                                        @else
+                                        <a href="#" data-id="{{ $tool->id }}"
+                                        class="btn btn-save btn-sm btn-outline-primary generate-qr-code">
+                                            Generate Qr Code
+                                        </a>
+                                        @endif
                                         @if (count($tool->tasks) > 0)
                                         <a href="{{ route('task.detail', $tool->id) }}" class="btn  btn-sm btn-outline-success">
                                             Detail Pertanyaan
@@ -89,6 +96,25 @@
         resetForm();
         resetError();
         $('#tool-modal').modal('show');
+    });
+
+    $(document).on('click', '.generate-qr-code', function(e){
+        e.preventDefault()
+        const id = $(this).data('id')
+        console.log(id);
+        console.log(id.toString());
+        $('#qrcode').empty();
+        $('#qrcode').css({
+            'width' : 128,
+            'height' : 128
+        })
+        $('#qrcode').qrcode({
+            width: 128,
+            height: 128,
+            text: id.toString()
+        });
+        //$('#a-id').val(id)
+        $('#generate-qrcode-modal').modal('show')
     });
 
     $(document).on('click', '.btn-img', function() {
