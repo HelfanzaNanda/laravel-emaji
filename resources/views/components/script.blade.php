@@ -1,5 +1,5 @@
 <script>
-    const BASE_URL = "{{ env('APP_URL') }}"
+    const BASE_URL = "{{ url('/') }}"
 </script>
 
 {{-- <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script> --}}
