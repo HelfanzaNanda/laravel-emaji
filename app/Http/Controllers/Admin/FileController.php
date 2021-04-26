@@ -25,7 +25,7 @@ class FileController extends Controller
     {
         File::destroy($id);
         return [
-            "url" => env("APP_URL").'/file',
+            "url" => url("/").'/file',
             'status' => 'success',
             'message' => 'Berhasil mengahapus data'
         ];

@@ -28,7 +28,7 @@ class UserController extends Controller
     {
         User::destroy($id);
         return [
-            "url" => env("APP_URL").'/user',
+            "url" => url("/").'/user',
             'status' => 'success',
             'message' => 'Berhasil mengahapus data'
         ];

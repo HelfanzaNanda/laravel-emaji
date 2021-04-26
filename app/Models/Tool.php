@@ -76,7 +76,7 @@ class Tool extends Model
             ]);
 
             return [
-                "url" => env("APP_URL").'/tool',
+                "url" => url("/") .'/tool',
                 'status' => 'success',
                 'message' => 'berhasil mengubah data !'
             ];
@@ -90,7 +90,7 @@ class Tool extends Model
         ]);
 
         return [
-            "url" => env("APP_URL").'/tool',
+            "url" => url("/").'/tool',
             'status' => 'success',
             'message' => 'berhasil menambahkan data !'
         ];

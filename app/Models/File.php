@@ -61,7 +61,7 @@ class File extends Model
             ]); 
 
             return [
-                "url" => env("APP_URL").'/file',
+                "url" => url("/") .'/file',
                 'status' => 'success',
                 'message' => 'berhasil mengubah data !'
             ];
@@ -73,7 +73,7 @@ class File extends Model
         ]);
 
         return [
-            "url" => env("APP_URL").'/file',
+            "url" => url("/") .'/file',
             'status' => 'success',
             'message' => 'berhasil menambahkan data !'
         ];

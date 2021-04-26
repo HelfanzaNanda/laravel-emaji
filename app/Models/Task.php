@@ -68,7 +68,7 @@ class Task extends Model
 
                 DB::commit();
                 return [
-                    "url" => env("APP_URL").'/tool',
+                    "url" => url("/") .'/tool',
                     'status' => 'success',
                     'message' => 'berhasil mengubah data !'
                 ];
@@ -91,7 +91,7 @@ class Task extends Model
     
             DB::commit();
             return [
-                "url" => env("APP_URL").'/tool',
+                "url" => url("/") .'/tool',
                 'status' => 'success',
                 'message' => 'berhasil menambahkan data !'
             ];

@@ -41,7 +41,7 @@ class LoginController extends Controller
         Auth::attempt($credentials);
         if (Auth::user()->isAdmin()) {
             return [
-                "url" => env("APP_URL") . '/user',
+                "url" => url("/") . '/user',
                 'status' => 'success',
                 'message' => 'berhasil Login !'
             ];

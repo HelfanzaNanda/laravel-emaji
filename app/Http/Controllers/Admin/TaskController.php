@@ -37,7 +37,7 @@ class TaskController extends Controller
         $task->taskCycleItems()->delete();
         $task->delete();
         return [
-            'url' => env("APP_URL")."/tool",
+            'url' => url("/")."/tool",
             'status' => 'success',
             'message' => 'Berhasil mengahapus data'
         ];
