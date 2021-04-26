@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CyclesController;
+use App\Http\Controllers\API\TasksController;
 use App\Http\Controllers\API\ToolsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -18,9 +19,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('login', [AuthController::class, 'login']);
+
 Route::get('tools', [ToolsController::class, 'index']);
-Route::post('tools/validate', [ToolsController::class, 'store']);
+Route::post('tools/{id}/validate', [ToolsController::class, 'validateQrCode']);
 Route::get('cycles', [CyclesController::class, 'index']);
+Route::get('tasks/{cycleId}/{toolId}', [TasksController::class, 'getTasks']);
 
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {

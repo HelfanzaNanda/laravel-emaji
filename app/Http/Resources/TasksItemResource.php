@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class TasksResource extends JsonResource
+class TasksItemResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,10 +16,7 @@ class TasksResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'cycle_id' => $request->cycleId,
-            'tool_id' => $this->tool_id,
-            'tool_used' => $this->tools_used,
-            'tasks' => TasksItemResource::collection($this->taskItems)
+            'body' => $this->body,
         ];
     }
 }

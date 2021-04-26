@@ -26,39 +26,22 @@ class ToolsController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function validateQrCode($id)
     {
-        $rules = Validator::make($request->all(),[
-            'name' => 'required',
-            'merk' => 'required',
-            'image' => 'file|required|mimes:jpg,jpeg,png|max:2048',
-        ]);
-        if ($rules->fails()) {
+        $tool = Tool::where('id', $id)->first();
+        if ($tool) {
             return response()->json([
-                'message' => $rules->errors(),
+                'message' => 'tool found',
+                'status' => true,
+                'data' => new ToolsResource($tool)
+            ], 200);
+        }else{
+            return response()->json([
+                'message' => 'tool not found',
                 'status' => false,
                 'data' => (object)[]
-            ], 400);
+            ], 401);
         }
-
-
-        $image = $request->file('image');
-        $filename = time(). $image->getClientOriginalExtension();
-        $path=public_path('uploads/files');
-        $image->move($path, $filename);
-
-        $tool = new Tool();
-        $tool->name = $request->name;
-        // $tool->slug = $request->slug;
-        $tool->merk = $request->merk;
-        $tool->image = $filename;
-
-        $tool->save();
-
-        return response()->json([
-            'message' => 'Berhasil Menambahkan Artikel',
-            'status' => true,
-            'data' => $tool
-        ], 200);
     }
+
 }
