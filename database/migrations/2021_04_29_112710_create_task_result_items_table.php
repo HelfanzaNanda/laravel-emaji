@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTaskResultsTable extends Migration
+class CreateTaskResultItemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateTaskResultsTable extends Migration
      */
     public function up()
     {
-        Schema::create('task_results', function (Blueprint $table) {
+        Schema::create('task_result_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('task_id');
-            $table->foreignId('cycle_id');
-            $table->foreignId('tool_id');
+            $table->foreignId('task_result_id');
+            $table->foreignId('task_item_id');
+            $table->boolean('value')->default(false);
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateTaskResultsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('task_results');
+        Schema::dropIfExists('task_result_items');
     }
 }

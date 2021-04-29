@@ -24,6 +24,7 @@ Route::get('tools', [ToolsController::class, 'index']);
 Route::post('tools/{id}/validate', [ToolsController::class, 'validateQrCode']);
 Route::get('cycles', [CyclesController::class, 'index']);
 Route::get('tasks/{cycleId}/{toolId}', [TasksController::class, 'getTasks']);
+Route::post('tasks/store', [TasksController::class, 'store']);
 
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
