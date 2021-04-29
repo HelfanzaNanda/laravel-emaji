@@ -11,16 +11,16 @@ class TasksController extends Controller
 {
     public function getTasks($cycleId, $toolId)
     {
-        $tasks = Task::select('tasks.*')
+        $task = Task::select('tasks.*')
         ->join('task_cycle_items', 'tasks.id', '=', 'task_cycle_items.task_id')
         ->join('cycles', 'cycles.id', 'task_cycle_items.cycle_id')
         ->where('cycles.id', $cycleId)
         ->where('tasks.tool_id', $toolId)
-        ->get();
+        ->first();
         return response()->json([
             'message' => 'successfully get tasks',
             'status' => true,
-            'data' => TasksResource::collection($tasks)
+            'data' => new TasksResource($task)
         ]);
     }
 }
