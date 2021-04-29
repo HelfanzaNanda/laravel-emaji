@@ -15,11 +15,13 @@ class TasksResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'cycle_id' => $request->cycleId,
-            'tool_id' => $this->tool_id,
-            'tool_used' => $this->tools_used,
-            'tasks' => TasksItemResource::collection($this->taskItems)
+            'id' => $this['task']['id'],
+            'cycle_id' => $this['cycle']['id'],
+            'cycle_name' => $this['cycle']['name'],
+            'tool_id' => $this['tool']['id'],
+            'tool_name' => $this['tool']['name'],
+            'tool_used' => $this['task']['tools_used'],
+            'tasks' => TasksItemResource::collection($this['task']['taskItems'])
         ];
     }
 }
