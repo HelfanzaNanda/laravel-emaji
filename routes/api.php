@@ -22,7 +22,7 @@ Route::post('login', [AuthController::class, 'login']);
 
 Route::get('tools', [ToolsController::class, 'index']);
 Route::post('tools/{id}/validate', [ToolsController::class, 'validateQrCode']);
-Route::get('cycles', [CyclesController::class, 'index']);
+Route::get('cycles/{toolId}', [CyclesController::class, 'index']);
 Route::get('tasks/{cycleId}/{toolId}', [TasksController::class, 'getTasks']);
 Route::post('tasks/store', [TasksController::class, 'store']);
 
