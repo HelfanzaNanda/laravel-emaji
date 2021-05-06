@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class TaskResultItems extends Model
 {
     protected $guarded = [];
+
+    public function task_item()
+    {
+        return $this->belongsTo(TaskItems::class, 'task_item_id');
+    }
 }
