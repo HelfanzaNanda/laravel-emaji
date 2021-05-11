@@ -7,12 +7,16 @@ use App\Http\Resources\TasksResource;
 use App\Models\Cycle;
 use App\Models\Task;
 use App\Models\TaskResult;
+use App\Models\TaskResultImages;
 use App\Models\TaskResultItems;
 use App\Models\Tool;
+use App\Traits\uploadFileTrait;
 use Illuminate\Http\Request;
 
 class TasksController extends Controller
 {
+    use uploadFileTrait;
+
     public function __construct()
     {
         $this->middleware('auth:api');
@@ -48,6 +52,7 @@ class TasksController extends Controller
                 'cycle_id' => $request->cycle_id,
                 'task_id' => $request->task_id,
                 'user_id' => auth()->id(),
+                'note' => $request->note
             ]);
     
             $tasks = $request->tasks;
@@ -57,6 +62,16 @@ class TasksController extends Controller
                     'task_item_id' => $task['id'],
                     'value' => $task['answer']
                 ]);
+            }
+
+            $images = $request->images;
+            if ($images) {
+                foreach ($images as $image) {
+                    TaskResultImages::create([
+                        'task_result_id' => $taskResult->id,
+                        'filename' => $this->uploadImage($image)
+                    ]);
+                }
             }
     
             return response()->json([

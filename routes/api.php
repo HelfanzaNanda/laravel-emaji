@@ -33,9 +33,10 @@ Route::get('history', [HistoryController::class, 'index']);
 
 
 Route::middleware('auth:api')->group(function(){
-    Route::get('user', function(Request $request){
-        return $request->user();
-    });
+    // Route::get('user', function(Request $request){
+    //     return $request->user();
+    // });
+    Route::get('user', [UserController::class, 'index']);
     Route::post('user/update/info', [UserController::class, 'updateInfo']);
     Route::post('user/update/password', [UserController::class, 'updatePassword']);
 });

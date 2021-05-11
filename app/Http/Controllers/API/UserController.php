@@ -8,7 +8,18 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    
+
+    public function index()
+    {
+        $user_id = auth()->id();
+        $user = User::where('id', $user_id)->first();
+        return response()->json([
+            'message' => 'successfully get current user',
+            'status' => true,
+            'data' => $user
+        ]);
+    }
+
     public function updateInfo(Request $request)
     {
         $user_id = auth()->id();
