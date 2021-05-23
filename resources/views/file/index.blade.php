@@ -33,7 +33,7 @@
                                 <tr>
                                     <td>{{ (($files->currentPage() - 1 ) * $files->perPage() ) + $loop->iteration }}
                                     </td>
-                                    <td><a href="{{ asset('uploads/files/'.$file->file) }}">{{ $file->name }}</a></td>
+                                    <td><a target="_blank" href="{{ asset('uploads/files/'.$file->file) }}">{{ $file->name }}</a></td>
                                     <td>
                                         <a href="#" data-id="{{ $file->id }}" class="btn btn-delete btn-sm btn-outline-danger"><i
                                                 class="fas fa-trash"></i></a>
