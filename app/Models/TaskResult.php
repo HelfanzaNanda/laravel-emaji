@@ -34,4 +34,9 @@ class TaskResult extends Model
     {
         return $this->hasMany(TaskResultItems::class, 'task_result_id');
     }
+
+	public function task_result_images()
+	{
+		return $this->hasMany(TaskResultImages::class, 'task_result_id');
+	}
 }

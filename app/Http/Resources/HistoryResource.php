@@ -23,7 +23,9 @@ class HistoryResource extends JsonResource
             'tool_id' => $this->tool->id,
             'tool_name' => $this->tool->name,
             'tool_image' => $this->tool->image,
-            'history_items' => HistoryItemsResource::collection($this->task_result_items)
+			'note' => $this->note,
+            'history_items' => HistoryItemsResource::collection($this->task_result_items),
+			'history_images' => HistoryImagesResource::collection($this->task_result_images)
         ];
     }
 }
