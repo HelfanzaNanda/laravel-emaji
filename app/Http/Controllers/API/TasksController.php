@@ -90,9 +90,8 @@ class TasksController extends Controller
         }
     }
 
-	public function storeImages(Request $request)
+	public function storeImages(Request $request, $task_result_id)
 	{
-		$task_result_id = $request->task_result_id;
 		try {
 			$images = $request->images;
             if ($images) {

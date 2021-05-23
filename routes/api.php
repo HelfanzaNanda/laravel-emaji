@@ -28,7 +28,7 @@ Route::post('tools/{id}/validate', [ToolsController::class, 'validateQrCode']);
 Route::get('cycles/{toolId}', [CyclesController::class, 'index']);
 Route::get('tasks/{cycleId}/{toolId}', [TasksController::class, 'getTasks']);
 Route::post('tasks/store', [TasksController::class, 'store']);
-Route::post('tasks/store/images', [TasksController::class, 'storeImages']);
+Route::post('tasks/store/{task_result_id}/images', [TasksController::class, 'storeImages']);
 Route::get('files', [FileController::class, 'index']);
 Route::get('history', [HistoryController::class, 'index']);
 
