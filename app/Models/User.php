@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
@@ -124,6 +125,7 @@ class User extends Authenticatable
             'name' => $params['name'],
             'email' => $params['email'],
             'role' => $params['role'],
+            'api_token' => Str::random(60),
             'password' => Hash::make('12345678')
         ]);
 
