@@ -11,7 +11,9 @@ class HistoryController extends Controller
 {
     public function index()
     {
-        $taskResults = TaskResult::with('task_result_items')->get();
+        $taskResults = TaskResult::with(['task_result_items' => function($items){
+			$items->whereDate('created_at', now()->format('Y-m-d'));
+		}])->whereDate('created_at', now()->format('Y-m-d'))->get();
 		$results = [];
 		foreach($taskResults as $result){
 			$in_array = in_array($result->tool_id, array_column($results, 'tool_id'));

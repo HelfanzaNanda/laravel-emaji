@@ -12,12 +12,12 @@ class File extends Model
     use HasFactory, SoftDeletes;
     protected $guarded = [];
 
-    // private static function uploadFile($file){
-    //     $filename = time() . '-file' . '.' . $file->getClientOriginalExtension();
-    //     $path = public_path('uploads/files');
-    //     $file->move($path, $filename);
-    //     return $filename;
-    // }
+    private static function uploadFile($file){
+        $filename = time() . '-file' . '.' . $file->getClientOriginalExtension();
+        $path = public_path('uploads/files');
+        $file->move($path, $filename);
+        return $filename;
+    }
 
     public static function uploadImage($img)
     {
