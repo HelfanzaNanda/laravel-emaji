@@ -28,14 +28,12 @@ Route::post('tools/{id}/validate', [ToolsController::class, 'validateQrCode']);
 Route::get('cycles/{toolId}', [CyclesController::class, 'index']);
 Route::get('tasks/{cycleId}/{toolId}', [TasksController::class, 'getTasks']);
 Route::post('tasks/store', [TasksController::class, 'store']);
+Route::post('tasks/store/images', [TasksController::class, 'storeImages']);
 Route::get('files', [FileController::class, 'index']);
 Route::get('history', [HistoryController::class, 'index']);
 
 
 Route::middleware('auth:api')->group(function(){
-    // Route::get('user', function(Request $request){
-    //     return $request->user();
-    // });
     Route::get('user', [UserController::class, 'index']);
     Route::post('user/update/info', [UserController::class, 'updateInfo']);
     Route::post('user/update/password', [UserController::class, 'updatePassword']);

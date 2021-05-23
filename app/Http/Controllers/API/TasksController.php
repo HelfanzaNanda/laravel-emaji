@@ -77,7 +77,9 @@ class TasksController extends Controller
             return response()->json([
                 'message' => 'successfully store tasks',
                 'status' => true,
-                'data' => (object)[]
+                'data' => [
+					'id' => $taskResult->id
+				]
             ]);
         } catch (\Throwable $th) {
             return response()->json([
@@ -86,8 +88,32 @@ class TasksController extends Controller
                 'data' => (object)[]
             ]);
         }
-
-        
-        
     }
+
+	public function storeImages(Request $request)
+	{
+		$task_result_id = $request->task_result_id;
+		try {
+			$images = $request->images;
+            if ($images) {
+                foreach ($images as $image) {
+                    TaskResultImages::create([
+                        'task_result_id' => $task_result_id,
+                        'filename' => $this->uploadImage($image)
+                    ]);
+                }
+            }
+			return response()->json([
+                'message' => 'successfully send images',
+                'status' => true,
+                'data' => (object)[]
+            ]);
+		} catch (\Throwable $th) {
+			return response()->json([
+                'message' => $th->getMessage(),
+                'status' => false,
+                'data' => (object)[]
+            ]);
+		}		
+	}
 }
