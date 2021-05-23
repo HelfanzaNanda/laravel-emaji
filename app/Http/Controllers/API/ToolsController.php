@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Tool;
+use Symfony\Component\HttpFoundation\Response;
 
 class ToolsController extends Controller
 {
@@ -23,7 +24,7 @@ class ToolsController extends Controller
             'message' => 'Berhasil Menampilkan Tools',
             'status' => true,
             'data' => ToolsResource::collection($tools),
-        ]);
+		], Response::HTTP_OK);
     }
 
     public function validateQrCode($id, $name)
@@ -36,13 +37,13 @@ class ToolsController extends Controller
                 'message' => 'tool found',
                 'status' => true,
                 'data' => new ToolsResource($tool)
-            ], 200);
+            ], Response::HTTP_OK);
         }else{
             return response()->json([
                 'message' => 'tool not found',
                 'status' => false,
                 'data' => (object)[]
-            ], 401);
+            ], Response::HTTP_NOT_FOUND);
         }
     }
 

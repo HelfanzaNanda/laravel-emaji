@@ -42,30 +42,31 @@ class CyclesController extends Controller
 
 		foreach ($taskResults as $result) {
 			$key = array_search($result->cycle_id, array_column($cycles, 'id'));
+			array_push($results, $result->cycle_id);
 			if ($key !== false) {
 				if ($result->cycle_id == 1) {
 					$isToday = $result->created_at->isToday();
-					if ($isToday || $result->created_at == now()->format('Y-m-d')) {
+					if ($isToday || $result->created_at->format('Y-m-d') == now()->format('Y-m-d')) {
 						unset($cycles[$key]);
 					}
 				}else if ($result->cycle_id == 2) {
 					$isToday = $result->created_at->addWeeks(1)->isToday();
-					if ($isToday || $result->created_at == now()->format('Y-m-d')) {
+					if ($isToday || $result->created_at->format('Y-m-d') == now()->format('Y-m-d')) {
 						unset($cycles[$key]);
 					}
 				}else if ($result->cycle_id == 3) {
 					$isToday = $result->created_at->addMonths(1)->isToday();
-					if ($isToday || $result->created_at == now()->format('Y-m-d')) {
+					if ($isToday || $result->created_at->format('Y-m-d') == now()->format('Y-m-d')) {
 						unset($cycles[$key]);
 					}
 				}else if ($result->cycle_id == 4) {
 					$isToday = $result->created_at->addMonths(6)->isToday();
-					if ($isToday || $result->created_at == now()->format('Y-m-d')) {
+					if ($isToday || $result->created_at->format('Y-m-d') == now()->format('Y-m-d')) {
 						unset($cycles[$key]);
 					}
 				}else if ($result->cycle_id == 5) {
 					$isToday = $result->created_at->addYears(1)->isToday();
-					if ($isToday || $result->created_at == now()->format('Y-m-d')) {
+					if ($isToday || $result->created_at->format('Y-m-d') == now()->format('Y-m-d')) {
 						unset($cycles[$key]);
 					}
 				}
@@ -75,6 +76,7 @@ class CyclesController extends Controller
             'message' => 'Berhasil Menampilkan cycles',
             'status' => true,
             'data' => array_values($cycles)
+            //'data' => $results
         ]);
     }
 }
