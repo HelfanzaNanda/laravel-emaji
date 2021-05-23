@@ -12,10 +12,18 @@ class HistoryController extends Controller
     public function index()
     {
         $taskResults = TaskResult::with('task_result_items')->get();
+		$results = [];
+		foreach($taskResults as $result){
+			$in_array = in_array($result->tool_id, array_column($results, 'tool_id'));
+			if (!$in_array) {
+				array_push($results, $result);
+			}
+		}
+		
         return response()->json([
             'message' => 'successfully store tasks',
             'status' => true,
-            'data' => HistoryResource::collection($taskResults)
+            'data' => HistoryResource::collection(collect($results))
         ]);
 
     }

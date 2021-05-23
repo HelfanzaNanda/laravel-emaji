@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', [AuthController::class, 'login']);
 
 Route::get('tools', [ToolsController::class, 'index']);
-Route::post('tools/{id}/validate', [ToolsController::class, 'validateQrCode']);
+Route::post('tools/{id}/{name}/validate', [ToolsController::class, 'validateQrCode']);
 Route::get('cycles/{toolId}', [CyclesController::class, 'index']);
 Route::get('tasks/{cycleId}/{toolId}', [TasksController::class, 'getTasks']);
 Route::post('tasks/store', [TasksController::class, 'store']);

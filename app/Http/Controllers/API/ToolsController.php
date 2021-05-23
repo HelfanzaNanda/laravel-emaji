@@ -26,9 +26,11 @@ class ToolsController extends Controller
         ]);
     }
 
-    public function validateQrCode($id)
+    public function validateQrCode($id, $name)
     {
-        $tool = Tool::where('id', $id)->first();
+        $tool = Tool::where('id', $id)
+		->where('name', $name)
+		->first();
         if ($tool) {
             return response()->json([
                 'message' => 'tool found',
