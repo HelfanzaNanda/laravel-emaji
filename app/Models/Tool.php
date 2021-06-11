@@ -31,12 +31,20 @@ class Tool extends Model
 
     public static function validateForm($params)
     {
-        $rules = [
-            'name' => ['required', 'string'],
-            'merk' => ['required'],
-            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,svg', 'max:2048'],
-        ];
-
+		if ($params['id']) {
+			$rules = [
+				'name' => ['required', 'string'],
+				'merk' => ['required'],
+				'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,svg', 'max:2048'],
+			];	
+		}else{
+			$rules = [
+				'name' => ['required', 'string'],
+				'merk' => ['required'],
+				'image' => ['required', 'image', 'mimes:jpeg,png,jpg,svg', 'max:2048'],
+			];	
+		}
+        
         $messages = [
             'required' => ':attribute tidak boleh kosong',
             'string' => ':attribute harus bertipe teks',

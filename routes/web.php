@@ -35,6 +35,9 @@ Route::middleware('auth')->group(function() {
     
     Route::prefix('task-result')->group(function() {
         Route::get('/', [TaskResultController::class, 'index'])->name('task.result.index');
+        Route::get('/filter', [TaskResultController::class, 'filter'])->name('task.result.filter');
+        Route::get('/pdf/{id}', [TaskResultController::class, 'pdf'])->name('task.result.pdf');
+		Route::get('/{id}', [TaskResultController::class, 'detail'])->name('task.result.detail');
     });
 
     Route::prefix('file')->group(function() {

@@ -101,8 +101,6 @@
     $(document).on('click', '.generate-qr-code', function(e){
         e.preventDefault()
         const id = $(this).data('id')
-        console.log(id);
-        console.log(id.toString());
         $('#qrcode').empty();
         $('#qrcode').css({
             'width' : 128,
@@ -113,6 +111,15 @@
             height: 128,
             text: id.toString()
         });
+		//console.log();
+		let img = document.querySelector('#qrcode canvas').toDataURL("image/png");
+		$('.download-qrcode').on('click', function (e) {  
+			e.preventDefault()
+			let dl = document.createElement('a');
+			dl.setAttribute('href', img);
+			dl.setAttribute('download', 'qrcode.png');
+			dl.click();
+		})
         //$('#a-id').val(id)
         $('#generate-qrcode-modal').modal('show')
     });
