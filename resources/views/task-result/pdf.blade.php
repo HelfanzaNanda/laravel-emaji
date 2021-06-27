@@ -41,7 +41,7 @@
 		</style>
 </head>
 <body>
-	<h2><center>Hasil</center></h2>
+	<h2><center>Hasil Pemeliharaan & Perawatan</center></h2>
 	<table class="table-header">
 		<tr>
 			<td>Nama</td>
@@ -89,10 +89,10 @@
 	</div>
 	<div class="images">
 		<p>Images</p>
-		{{-- @foreach ($result->task_result_images as $image)
+		@foreach ($result->task_result_images as $image)
 			<img src="{{ $image->filename }}" height="230"
 			style="object-fit: cover; object-position: center">
-		@endforeach --}}
+		@endforeach
 	</div>
 </body>
 </html>
